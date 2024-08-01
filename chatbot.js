@@ -20,7 +20,7 @@ async function getAIResponse(message) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer YOUR_API_KEY`
+                'Authorization': `Bearer sk-proj-Zg0JHIOyNjypaMVnOCn6T3BlbkFJoOhhxP2QvwSm7xEcxedG`
             },
             body: JSON.stringify({
                 model: 'gpt-4', // or the model you are using
