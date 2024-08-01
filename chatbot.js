@@ -1,5 +1,6 @@
 document.getElementById("send-btn").addEventListener("click", async () => {
     const userInput = document.getElementById("user-input").value;
+    console.log("User input:", userInput);
     if (userInput.trim() === "") return;
 
     addMessage("User", userInput);
@@ -15,6 +16,7 @@ document.getElementById("send-btn").addEventListener("click", async () => {
 });
 
 async function getAIResponse(message) {
+    console.log("Sending message to AI:", message);
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -28,6 +30,8 @@ async function getAIResponse(message) {
             })
         });
 
+        console.log("API response status:", response.status);
+
         if (!response.ok) {
             const errorDetails = await response.text();
             console.error("API response error:", errorDetails);
@@ -35,6 +39,7 @@ async function getAIResponse(message) {
         }
 
         const data = await response.json();
+        console.log("API response data:", data);
         return data.choices[0].message.content;
     } catch (error) {
         console.error("Error fetching AI response:", error);
