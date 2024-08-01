@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NEWSAPP-HOME</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-brand {
+            color: #fff;
+        }
+
+        .nav-link {
+            color: #fff !important;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .head {
+            text-align: center;
+            color: #000;
+            text-shadow: #333;
+        }
+
+        .HEADLINE {
+            justify-content: space-between;
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">NEWS APP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="ABOUT.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="ABOUT.html">ABOUT</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            WORLD
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">US</a></li>
+                            <li><a class="dropdown-item" href="#">RUSSIA</a></li>
+                            <li><a class a="dropdown-item" href="#">CHINA</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="INDIA.html">INDIA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="KUWAIT.html">KUWAIT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="SPORTS.html">SPORTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Science.html">SCIENTIFIC</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="search" class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>WELCOME TO REHAN'S NEWS APP</h1>
+        <div class="container">
+            <div class="HEADLINE">
+                <h3>GET TOP HEADLINES FROM AROUND THE WORLD</h3>
+            </div>
+            <div class="row content">
+                <div class="card my-4 mx-2" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-between"> </div>
+    
+                <button class="btn btn-primary">PREVIOUS PAGE</button>
+                <div class="d-flex justify-content-between"> </div>
+                <button class="btn btn-primary">NEXT PAGE</button>
+            </div>
+        </div>
+    <script>
+        const fetchNews = async (page, q) => {
+            console.log(`Fetching news for ${q}, Page number ${page}...`);
+            var url = 'https://newsapi.org/v2/everything?' +
+                'q=' +q+
+                '&from=2023-10-13&' +
+                'pageSize=50&' +
+                'language=en&' +
+                'page=' +page+
+                '&sortBy=popularity&' +
+                'apiKey=c4670215c35e49aaa3ba67914cdff33f';
+    
+            var req = new Request(url);
+    
+            let a = await fetch(req);
+            let response = await a.json();
+            console.log(JSON.stringify(response));
+                console.log(response)
+                let str = ""
+                for (let item of response.articles){
+                    str = str + `<div class="card my-4 mx-2" style="width: 18rem;">
+                        <img src="${item.urlToImage}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.title}</h5>
+                            <p class="card-text"></p>
+                            <a href="${item.url}" target="_blank" class="btn btn-primary">Read Full Article</a>
+                        </div>
+                    </div>`
+            }
+    
+            document.querySelector(".content").innerHTML = str
+        }
+    
+        fetchNews(1, "WORLD")
+        search.addEventListener("click", (e)=>{
+            e.preventDefault()
+            let query = searchInput.value;
+        fetchNews(1, query)
+        })
+        </script>
+    </body>
+    
+    </html>
