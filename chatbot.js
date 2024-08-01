@@ -32,17 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function sendToChatbot(message) {
-        fetch("https://api.example.com/chat", {  // Replace with your actual API endpoint
+        fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer sk-proj-LKTJiYqPrlJgiV4Ds3KOT3BlbkFJxhHggczA1PNRlbwCNnBz`
+                "Authorization": `Bearer sk-proj-LKTJiYqPrlJgiV4Ds3KOT3BlbkFJxhHggczA1PNRlbwCNnBz` // Replace with your actual API key
             },
-            body: JSON.stringify({ message: message })
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo", // Or another model if applicable
+                messages: [
+                    { role: "user", content: message }
+                ]
+            })
         })
         .then(response => response.json())
         .then(data => {
-            displayMessage(data.reply, "bot");
+            const botReply = data.choices[0].message.content;
+            displayMessage(botReply, "bot");
         })
         .catch(error => {
             console.error("Error:", error);
@@ -50,3 +56,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
