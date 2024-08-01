@@ -1,29 +1,36 @@
-function sendToChatbot(message) {
-    fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
+document.getElementById("send-btn").addEventListener("click", async () => {
+    const userInput = document.getElementById("user-input").value;
+    if (userInput.trim() === "") return;
+
+    addMessage("User", userInput);
+    document.getElementById("user-input").value = "";
+
+    const response = await getAIResponse(userInput);
+    addMessage("AI", response);
+});
+
+async function getAIResponse(message) {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer sk-proj-LKTJiYqPrlJgiV4Ds3KOT3BlbkFJxhHggczA1PNRlbwCNnBz`
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer sk-proj-Zg0JHIOyNjypaMVnOCn6T3BlbkFJoOhhxP2QvwSm7xEcxedG`
         },
         body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [
-                { role: "user", content: message }
-            ]
+            model: 'gpt-4', // or the model you are using
+            messages: [{ role: 'user', content: message }]
         })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        const botReply = data.choices[0].message.content;
-        displayMessage(botReply, "bot");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        displayMessage("Sorry, there was an error.", "bot");
     });
+
+    const data = await response.json();
+    return data.choices[0].message.content;
+}
+
+function addMessage(sender, message) {
+    const chatBox = document.getElementById("chat-box");
+    const messageElem = document.createElement("div");
+    messageElem.className = "message";
+    messageElem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    chatBox.appendChild(messageElem);
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
