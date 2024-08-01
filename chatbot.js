@@ -25,7 +25,7 @@ async function getAIResponse(message) {
                 'Authorization': `Bearer sk-proj-Zg0JHIOyNjypaMVnOCn6T3BlbkFJoOhhxP2QvwSm7xEcxedG`
             },
             body: JSON.stringify({
-                model: 'gpt-4', // or the model you are using
+                model: 'gpt-4',
                 messages: [{ role: 'user', content: message }]
             })
         });
