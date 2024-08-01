@@ -1,16 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatbox = document.getElementById("chatbox");
     const userinput = document.getElementById("userinput");
+    const sendbtn = document.getElementById("sendbtn");
+
+    function sendMessage() {
+        const userMessage = userinput.value;
+        if (userMessage.trim() !== "") {
+            displayMessage(userMessage, "user");
+            userinput.value = "";
+            sendToChatbot(userMessage);
+        }
+    }
 
     userinput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            const userMessage = userinput.value;
-            if (userMessage.trim() !== "") {
-                displayMessage(userMessage, "user");
-                userinput.value = "";
-                sendToChatbot(userMessage);
-            }
+            sendMessage();
         }
+    });
+
+    sendbtn.addEventListener("click", () => {
+        sendMessage();
     });
 
     function displayMessage(message, sender) {
