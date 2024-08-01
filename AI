@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chatbox { width: 300px; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
+        #userinput { width: 100%; padding: 10px; }
+        .message { margin: 5px 0; }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+    <div id="chatbox"></div>
+    <input type="text" id="userinput" placeholder="Type a message..." />
+
+    <script src="chatbot.js"></script>
+</body>
+</html>
