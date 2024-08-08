@@ -18,12 +18,19 @@ p {
 }
 
 /* Navbar */
-/* Navbar */
 .navbar {
     background-color: #000000; /* Black color */
+    padding: 10px 20px;
+    border-bottom: 2px solid #ffc107; /* Golden border at the bottom */
 }
 
-.navbar-brand, .nav-link {
+.navbar-brand {
+    font-size: 1.5em;
+    color: #ffc107 !important; /* Golden color for the brand name */
+    font-weight: 700;
+}
+
+.nav-link {
     color: #ffffff !important; /* White text color */
     font-weight: 500;
     margin-left: 20px;
@@ -31,7 +38,7 @@ p {
     transition: color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link:focus, .navbar-brand:hover, .navbar-brand:focus {
+.nav-link:hover, .nav-link:focus {
     color: #ffc107 !important; /* Golden hover effect */
 }
 
@@ -73,7 +80,7 @@ h2 {
 
 /* Footer */
 footer {
-    background-color: #6c757d; /* Grey color */
+    background-color: #000000; /* Black color */
     color: #fff;
     text-align: center;
     padding: 20px 0;
